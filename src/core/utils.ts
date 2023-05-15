@@ -9,7 +9,7 @@ const traverse =
     ? _traverse
     : ((_traverse as any).default as typeof _traverse);
 
-type Parsed = ParseResult<File>;
+type Parsed = ParseResult<t.File>;
 
 export const parse = (code: string) =>
   babelParse(code, {
@@ -43,8 +43,8 @@ export function haveDefineComponentImport(parsed: Parsed) {
 function findTypeDefinitionMembersByName(
   parsed: Parsed,
   name: string,
-): TSPropertySignature[] | null {
-  let result: TSPropertySignature[] | null = null;
+): t.TSPropertySignature[] | null {
+  let result: t.TSPropertySignature[] | null = null;
   traverse(parsed, {
     TSInterfaceDeclaration({ node }) {
       if (node.id.name === name) {
@@ -62,7 +62,7 @@ function findTypeDefinitionMembersByName(
 }
 
 /** Get member keys from a CallExpression, extracts its typeDefinition */
-function findPropTypeMemberKeys(parsed: Parsed, node: CallExpression) {
+function findPropTypeMemberKeys(parsed: Parsed, node: t.CallExpression) {
   if (node.typeParameters) {
     const [param] = node.typeParameters.params;
     if (t.isTSTypeLiteral(param)) {
