@@ -9,7 +9,7 @@ export default createUnplugin<Options | undefined>((_options) => ({
   enforce: "pre",
   transform(code, id) {
     if (!id.endsWith(".tsx")) {
-      return 
+      return;
     }
 
     return transform(code);
