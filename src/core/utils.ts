@@ -4,7 +4,10 @@ import type { CallExpression, File, TSPropertySignature } from "@babel/types";
 import * as t from "@babel/types";
 import _traverse from "@babel/traverse";
 
-const traverse = (_traverse as any).default as typeof _traverse;
+const traverse =
+  typeof (_traverse as any).default === "undefined"
+    ? _traverse
+    : ((_traverse as any).default as typeof _traverse);
 
 type Parsed = ParseResult<File>;
 
