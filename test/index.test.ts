@@ -30,7 +30,52 @@ const Bar = defineComponent(
   },
 );
 `;
-    expect(transform(code)).toMatchSnapshot();
+    expect(transform(code)).toMatchInlineSnapshot(`
+      {
+        "code": "
+      import { defineComponent } from \\"vue\\";
+
+      interface Props<T> {
+        a: number;
+        b: {
+          some: boolean
+        }
+      }
+
+      type P1 = {
+        a: 1
+      }
+
+      const Foo = defineComponent(
+        <T>(props: P1<T>) => {
+          return <div>{props}</div>;
+        },
+      );
+      Object.defineProperty(Foo, \\"props\\", {
+        value: [\\"a\\"],
+      });
+
+      const Bar = defineComponent(
+        <T>(props: P1<T>) => {
+          return <div>{props}</div>;
+        },
+      );
+      Object.defineProperty(Bar, \\"props\\", {
+        value: [\\"a\\"],
+      });
+      ",
+        "map": SourceMap {
+          "file": undefined,
+          "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;;GAAE;AACF;AACA;AACA;AACA;AACA;AACA;;;GAAE;",
+          "names": [],
+          "sources": [
+            "",
+          ],
+          "sourcesContent": undefined,
+          "version": 3,
+        },
+      }
+    `);
   });
 
   it("should not transform default export", () => {
@@ -49,7 +94,35 @@ export default defineComponent(
   },
 );
 `;
-    expect(transform(code)).toMatchSnapshot();
+    expect(transform(code)).toMatchInlineSnapshot(`
+      {
+        "code": "
+      import { defineComponent } from \\"vue\\";
+
+      interface Props<T> {
+        a: number;
+        b: {
+          some: boolean
+        }
+      }
+      export default defineComponent(
+        <T>(props: Props<T>) => {
+          return <div>{props}</div>;
+        },
+      );
+      ",
+        "map": SourceMap {
+          "file": undefined,
+          "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;",
+          "names": [],
+          "sources": [
+            "",
+          ],
+          "sourcesContent": undefined,
+          "version": 3,
+        },
+      }
+    `);
   });
 
   it("should not transform non-functional components", () => {
@@ -65,7 +138,32 @@ const Foo = defineComponent({
     return () => <div>{props}</div>;
   },
 });`;
-    expect(transform(code)).toMatchSnapshot();
+    expect(transform(code)).toMatchInlineSnapshot(`
+      {
+        "code": "
+      import { defineComponent } from \\"vue\\";
+
+      type Props = {
+        foo: number
+      }
+
+      const Foo = defineComponent({
+        setup(props: Props) {
+          return () => <div>{props}</div>;
+        },
+      });",
+        "map": SourceMap {
+          "file": undefined,
+          "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA",
+          "names": [],
+          "sources": [
+            "",
+          ],
+          "sourcesContent": undefined,
+          "version": 3,
+        },
+      }
+    `);
   });
 
   it("should not transform complex type", () => {
@@ -76,11 +174,97 @@ type Props = 1 extends 1 ? {
   foo: number
 } : { a: string }
 
-const Foo = defineComponent({
-  setup(props: Props) {
-    return () => <div>{props}</div>;
-  },
-});`;
-    expect(transform(code)).toMatchSnapshot();
+const Foo = defineComponent((props: Props) => <div>{props}></div>);
+`;
+    expect(transform(code)).toMatchInlineSnapshot(`
+      {
+        "code": "
+      import { defineComponent } from \\"vue\\";
+
+      type Props = 1 extends 1 ? {
+        foo: number
+      } : { a: string }
+
+      const Foo = defineComponent((props: Props) => <div>{props}></div>);
+      ",
+        "map": SourceMap {
+          "file": undefined,
+          "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;",
+          "names": [],
+          "sources": [
+            "",
+          ],
+          "sourcesContent": undefined,
+          "version": 3,
+        },
+      }
+    `);
+  });
+
+  it("should not transform without type annotation", () => {
+    const code = `
+import { defineComponent } from "vue";
+
+const Foo = defineComponent((props) => <div>{props}></div>);
+`;
+
+    expect(transform(code)).toMatchInlineSnapshot(`
+      {
+        "code": "
+      import { defineComponent } from \\"vue\\";
+
+      const Foo = defineComponent((props) => <div>{props}></div>);
+      ",
+        "map": SourceMap {
+          "file": undefined,
+          "mappings": "AAAA;AACA;AACA;AACA;",
+          "names": [],
+          "sources": [
+            "",
+          ],
+          "sourcesContent": undefined,
+          "version": 3,
+        },
+      }
+    `);
+  });
+
+  it("should transform function declaration", () => {
+    const code = `
+import { defineComponent } from "vue";
+
+type Props = {
+  foo: number
+}
+
+const Foo = defineComponent(function (props: Props) { return <div>{props}></div> });
+`;
+
+    expect(transform(code)).toMatchInlineSnapshot(`
+      {
+        "code": "
+      import { defineComponent } from \\"vue\\";
+
+      type Props = {
+        foo: number
+      }
+
+      const Foo = defineComponent(function (props: Props) { return <div>{props}></div> });
+      Object.defineProperty(Foo, \\"props\\", {
+        value: [\\"foo\\"],
+      });
+      ",
+        "map": SourceMap {
+          "file": undefined,
+          "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;;GAAoF;",
+          "names": [],
+          "sources": [
+            "",
+          ],
+          "sourcesContent": undefined,
+          "version": 3,
+        },
+      }
+    `);
   });
 });
