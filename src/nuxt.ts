@@ -11,7 +11,7 @@ export default defineNuxtModule<Options>({
   meta: {
     name,
     version,
-    configKey: "pkg-name",
+    configKey: "autoProps",
     compatibility: {
       bridge: true,
     },

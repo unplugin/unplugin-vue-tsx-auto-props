@@ -1,0 +1,105 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`should > should not transform default export 1`] = `
+{
+  "code": "
+import { defineComponent } from \\"vue\\";
+
+interface Props<T> {
+  a: number;
+  b: {
+    some: boolean
+  }
+}
+export default defineComponent(
+  <T>(props: Props<T>) => {
+    return <div>{props}</div>;
+  },
+);
+",
+  "map": SourceMap {
+    "file": undefined,
+    "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;",
+    "names": [],
+    "sources": [
+      "",
+    ],
+    "sourcesContent": undefined,
+    "version": 3,
+  },
+}
+`;
+
+exports[`should > should not transform non-functional components 1`] = `
+{
+  "code": "
+import { defineComponent } from \\"vue\\";
+
+type Props = {
+  foo: number
+}
+
+const Foo = defineComponent({
+  setup(props: Props) {
+    return () => <div>{props}</div>;
+  },
+});",
+  "map": SourceMap {
+    "file": undefined,
+    "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA",
+    "names": [],
+    "sources": [
+      "",
+    ],
+    "sourcesContent": undefined,
+    "version": 3,
+  },
+}
+`;
+
+exports[`should > transform 1`] = `
+{
+  "code": "
+import { defineComponent } from \\"vue\\";
+
+interface Props<T> {
+  a: number;
+  b: {
+    some: boolean
+  }
+}
+
+type P1 = {
+  a: 1
+}
+
+const Foo = defineComponent(
+  <T>(props: P1<T>) => {
+    return <div>{props}</div>;
+  },
+);
+Object.defineProperty(Foo, \\"props\\", {
+  value: [\\"a\\"],
+});
+
+const Bar = defineComponent(
+  <T>(props: P1<T>) => {
+    return <div>{props}</div>;
+  },
+);
+Object.defineProperty(Bar, \\"props\\", {
+  value: [\\"a\\"],
+});
+",
+  "map": SourceMap {
+    "file": undefined,
+    "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;;GAAE;AACF;AACA;AACA;AACA;AACA;AACA;;;GAAE;",
+    "names": [],
+    "sources": [
+      "",
+    ],
+    "sourcesContent": undefined,
+    "version": 3,
+  },
+}
+`;
