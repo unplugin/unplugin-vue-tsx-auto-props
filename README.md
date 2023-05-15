@@ -37,9 +37,9 @@ Object.defineProperty(Foo, "props", {
 ## 📦 Installation
 
 ```bash
-$ npm install unplugin-vue-tsx-auto-props
-$ yarn add unplugin-vue-tsx-auto-props
-$ pnpm add unplugin-vue-tsx-auto-props
+$ npm install -D unplugin-vue-tsx-auto-props
+$ yarn add -D unplugin-vue-tsx-auto-props
+$ pnpm add -D unplugin-vue-tsx-auto-props
 ```
 
 ## 🚀 Usage
