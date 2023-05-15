@@ -5,6 +5,7 @@ import { transform } from "./transform";
 
 export default createUnplugin<Options | undefined>((_options) => ({
   name: "unplugin-vue-tsx-auto-props",
+  enforce: "pre",
   transform(code) {
     return transform(code);
   },
