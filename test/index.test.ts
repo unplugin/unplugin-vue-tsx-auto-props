@@ -19,7 +19,7 @@ type P1 = {
 }
 
 const Foo = defineComponent(
-  <T>(props: P1<T>) => {
+  <T>(props: Props<T>) => {
     return <div>{props}</div>;
   },
 );
@@ -47,12 +47,12 @@ const Bar = defineComponent(
       }
 
       const Foo = defineComponent(
-        <T>(props: P1<T>) => {
+        <T>(props: Props<T>) => {
           return <div>{props}</div>;
         },
       );
       Object.defineProperty(Foo, \\"props\\", {
-        value: [\\"a\\"],
+        value: [\\"a\\",\\"b\\"],
       });
 
       const Bar = defineComponent(
