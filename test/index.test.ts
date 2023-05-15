@@ -67,4 +67,20 @@ const Foo = defineComponent({
 });`;
     expect(transform(code)).toMatchSnapshot();
   });
+
+  it("should not transform complex type", () => {
+    const code = `
+import { defineComponent } from "vue";
+
+type Props = 1 extends 1 ? {
+  foo: number
+} : { a: string }
+
+const Foo = defineComponent({
+  setup(props: Props) {
+    return () => <div>{props}</div>;
+  },
+});`;
+    expect(transform(code)).toMatchSnapshot();
+  });
 });
