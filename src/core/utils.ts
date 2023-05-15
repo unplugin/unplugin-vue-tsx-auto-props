@@ -59,25 +59,23 @@ function findTypeDefinitionMembersByName(
 /** Get member keys from a CallExpression, extracts its typeDefinition */
 function findPropTypeMemberKeys(parsed: Parsed, node: CallExpression) {
   let memberKeys: string[] = [];
+  const [arg] = node.arguments;
 
-  for (const arg of node.arguments) {
-    if (t.isArrowFunctionExpression(arg)) {
-      const propsParam = arg.params[0];
-      if (
-        propsParam.typeAnnotation &&
-        "typeAnnotation" in propsParam.typeAnnotation
-      ) {
-        const { name: typeName } = (
-          propsParam.typeAnnotation.typeAnnotation as any
-        ).typeName;
-        const typeDefinitionMembers = findTypeDefinitionMembersByName(
-          parsed,
-          typeName,
-        );
-        memberKeys =
-          typeDefinitionMembers?.map((member) => (member.key as any)?.name) ??
-          [];
-      }
+  if (t.isArrowFunctionExpression(arg) || t.isFunctionExpression(arg)) {
+    const propsParam = arg.params[0];
+    if (
+      propsParam.typeAnnotation &&
+      "typeAnnotation" in propsParam.typeAnnotation
+    ) {
+      const { name: typeName } = (
+        propsParam.typeAnnotation.typeAnnotation as any
+      ).typeName;
+      const typeDefinitionMembers = findTypeDefinitionMembersByName(
+        parsed,
+        typeName,
+      );
+      memberKeys =
+        typeDefinitionMembers?.map((member) => (member.key as any)?.name) ?? [];
     }
   }
 
