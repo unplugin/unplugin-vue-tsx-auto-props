@@ -1,3 +1,4 @@
+// TODO: Support `setup` option
 import { createUnplugin } from "unplugin";
 
 import type { Options } from "./types";
