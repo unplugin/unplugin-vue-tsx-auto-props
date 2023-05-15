@@ -267,4 +267,43 @@ const Foo = defineComponent(function (props: Props) { return () => <div>{props}>
       }
     `);
   });
+
+  it("should transform type argument", () => {
+    const code = `
+import { defineComponent } from "vue";
+
+type Props = {
+  foo: number
+}
+
+const Foo = defineComponent<Props>((props) => () => <div>{props}></div>);
+`;
+
+    expect(transform(code)).toMatchInlineSnapshot(`
+      {
+        "code": "
+      import { defineComponent } from \\"vue\\";
+
+      type Props = {
+        foo: number
+      }
+
+      const Foo = defineComponent<Props>((props) => () => <div>{props}></div>);
+      Object.defineProperty(Foo, \\"props\\", {
+        value: [\\"foo\\"],
+      });
+      ",
+        "map": SourceMap {
+          "file": undefined,
+          "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;;GAAyE;",
+          "names": [],
+          "sources": [
+            "",
+          ],
+          "sourcesContent": undefined,
+          "version": 3,
+        },
+      }
+    `);
+  });
 });
