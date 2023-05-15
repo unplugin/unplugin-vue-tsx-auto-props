@@ -64,7 +64,14 @@ function findTypeDefinitionMembersByName(
 /** Get member keys from a CallExpression, extracts its typeDefinition */
 function findPropTypeMemberKeys(parsed: Parsed, node: CallExpression) {
   if (node.typeParameters) {
-    const { name: typeName } = (node.typeParameters.params[0] as any).typeName;
+    const [param] = node.typeParameters.params;
+    if (t.isTSTypeLiteral(param)) {
+      return param.members.map((member: any) => member.key?.name);
+    }
+    if (!t.isTSTypeReference(param) || !("name" in param.typeName)) {
+      return [];
+    }
+    const { name: typeName } = param.typeName;
     const typeDefinitionMembers = findTypeDefinitionMembersByName(
       parsed,
       typeName,
@@ -83,17 +90,23 @@ function findPropTypeMemberKeys(parsed: Parsed, node: CallExpression) {
       propsParam.typeAnnotation &&
       "typeAnnotation" in propsParam.typeAnnotation
     ) {
-      const { name: typeName } = (
-        propsParam.typeAnnotation.typeAnnotation as any
-      ).typeName;
-      const typeDefinitionMembers = findTypeDefinitionMembersByName(
-        parsed,
-        typeName,
-      );
+      if ("typeName" in propsParam.typeAnnotation.typeAnnotation) {
+        const { name: typeName } = (
+          propsParam.typeAnnotation.typeAnnotation as any
+        ).typeName;
+        const typeDefinitionMembers = findTypeDefinitionMembersByName(
+          parsed,
+          typeName,
+        );
 
-      return (
-        typeDefinitionMembers?.map((member) => (member.key as any)?.name) ?? []
-      );
+        return (
+          typeDefinitionMembers?.map((member: any) => member.key?.name) ?? []
+        );
+      } else if (t.isTSTypeLiteral(propsParam.typeAnnotation.typeAnnotation)) {
+        return propsParam.typeAnnotation.typeAnnotation.members.map(
+          (member: any) => member.key?.name,
+        );
+      }
     }
   }
 

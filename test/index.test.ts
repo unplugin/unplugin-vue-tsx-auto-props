@@ -306,4 +306,66 @@ const Foo = defineComponent<Props>((props) => () => <div>{props}></div>);
       }
     `);
   });
+
+  it("should transform inline type", () => {
+    const code = `
+import { defineComponent } from "vue";
+
+const Foo = defineComponent<{ foo: number }>((props) => () => <div>{props}></div>);
+`;
+
+    expect(transform(code)).toMatchInlineSnapshot(`
+      {
+        "code": "
+      import { defineComponent } from \\"vue\\";
+
+      const Foo = defineComponent<{ foo: number }>((props) => () => <div>{props}></div>);
+      Object.defineProperty(Foo, \\"props\\", {
+        value: [\\"foo\\"],
+      });
+      ",
+        "map": SourceMap {
+          "file": undefined,
+          "mappings": "AAAA;AACA;AACA;AACA;;;GAAmF;",
+          "names": [],
+          "sources": [
+            "",
+          ],
+          "sourcesContent": undefined,
+          "version": 3,
+        },
+      }
+    `);
+  });
+
+  it("should transform inline argument type", () => {
+    const code = `
+import { defineComponent } from "vue";
+
+const Foo = defineComponent((props: { foo: number }) => () => <div>{props}></div>);
+`;
+
+    expect(transform(code)).toMatchInlineSnapshot(`
+      {
+        "code": "
+      import { defineComponent } from \\"vue\\";
+
+      const Foo = defineComponent((props: { foo: number }) => () => <div>{props}></div>);
+      Object.defineProperty(Foo, \\"props\\", {
+        value: [\\"foo\\"],
+      });
+      ",
+        "map": SourceMap {
+          "file": undefined,
+          "mappings": "AAAA;AACA;AACA;AACA;;;GAAmF;",
+          "names": [],
+          "sources": [
+            "",
+          ],
+          "sourcesContent": undefined,
+          "version": 3,
+        },
+      }
+    `);
+  });
 });
