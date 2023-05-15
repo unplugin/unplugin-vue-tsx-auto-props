@@ -20,13 +20,13 @@ type P1 = {
 
 const Foo = defineComponent(
   <T>(props: Props<T>) => {
-    return <div>{props}</div>;
+    return () => <div>{props}</div>;
   },
 );
 
 const Bar = defineComponent(
   <T>(props: P1<T>) => {
-    return <div>{props}</div>;
+    return () => <div>{props}</div>;
   },
 );
 `;
@@ -48,7 +48,7 @@ const Bar = defineComponent(
 
       const Foo = defineComponent(
         <T>(props: Props<T>) => {
-          return <div>{props}</div>;
+          return () => <div>{props}</div>;
         },
       );
       Object.defineProperty(Foo, \\"props\\", {
@@ -57,7 +57,7 @@ const Bar = defineComponent(
 
       const Bar = defineComponent(
         <T>(props: P1<T>) => {
-          return <div>{props}</div>;
+          return () => <div>{props}</div>;
         },
       );
       Object.defineProperty(Bar, \\"props\\", {
@@ -90,7 +90,7 @@ interface Props<T> {
 }
 export default defineComponent(
   <T>(props: Props<T>) => {
-    return <div>{props}</div>;
+    return () => <div>{props}</div>;
   },
 );
 `;
@@ -107,7 +107,7 @@ export default defineComponent(
       }
       export default defineComponent(
         <T>(props: Props<T>) => {
-          return <div>{props}</div>;
+          return () => <div>{props}</div>;
         },
       );
       ",
@@ -174,7 +174,7 @@ type Props = 1 extends 1 ? {
   foo: number
 } : { a: string }
 
-const Foo = defineComponent((props: Props) => <div>{props}></div>);
+const Foo = defineComponent((props: Props) => () => <div>{props}></div>);
 `;
     expect(transform(code)).toMatchInlineSnapshot(`
       {
@@ -185,7 +185,7 @@ const Foo = defineComponent((props: Props) => <div>{props}></div>);
         foo: number
       } : { a: string }
 
-      const Foo = defineComponent((props: Props) => <div>{props}></div>);
+      const Foo = defineComponent((props: Props) => () => <div>{props}></div>);
       ",
         "map": SourceMap {
           "file": undefined,
@@ -205,7 +205,7 @@ const Foo = defineComponent((props: Props) => <div>{props}></div>);
     const code = `
 import { defineComponent } from "vue";
 
-const Foo = defineComponent((props) => <div>{props}></div>);
+const Foo = defineComponent((props) => () => <div>{props}></div>);
 `;
 
     expect(transform(code)).toMatchInlineSnapshot(`
@@ -213,7 +213,7 @@ const Foo = defineComponent((props) => <div>{props}></div>);
         "code": "
       import { defineComponent } from \\"vue\\";
 
-      const Foo = defineComponent((props) => <div>{props}></div>);
+      const Foo = defineComponent((props) => () => <div>{props}></div>);
       ",
         "map": SourceMap {
           "file": undefined,
@@ -237,7 +237,7 @@ type Props = {
   foo: number
 }
 
-const Foo = defineComponent(function (props: Props) { return <div>{props}></div> });
+const Foo = defineComponent(function (props: Props) { return () => <div>{props}></div> });
 `;
 
     expect(transform(code)).toMatchInlineSnapshot(`
@@ -249,14 +249,14 @@ const Foo = defineComponent(function (props: Props) { return <div>{props}></div>
         foo: number
       }
 
-      const Foo = defineComponent(function (props: Props) { return <div>{props}></div> });
+      const Foo = defineComponent(function (props: Props) { return () => <div>{props}></div> });
       Object.defineProperty(Foo, \\"props\\", {
         value: [\\"foo\\"],
       });
       ",
         "map": SourceMap {
           "file": undefined,
-          "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;;GAAoF;",
+          "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;;GAA0F;",
           "names": [],
           "sources": [
             "",
