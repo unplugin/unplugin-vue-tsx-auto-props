@@ -2,7 +2,9 @@ import type { ParseResult } from "@babel/parser";
 import { parse as babelParse } from "@babel/parser";
 import type { CallExpression, File, TSPropertySignature } from "@babel/types";
 import * as t from "@babel/types";
-import traverse from "@babel/traverse";
+import _traverse from "@babel/traverse";
+
+const traverse = (_traverse as any).default as typeof _traverse;
 
 type Parsed = ParseResult<File>;
 
