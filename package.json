@@ -93,7 +93,7 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "typescript": ">*"
+    "typescript": "*"
   },
   "dependencies": {
     "@babel/parser": "^7.21.8",
