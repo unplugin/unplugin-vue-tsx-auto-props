@@ -15,7 +15,7 @@ interface Props {
   foo: string;
 }
 
-const Foo = defineComponent((props: Props)=>() => <div>{props.foo}</div>);
+const Foo = defineComponent((props: Props) => () => <div>{props.foo}</div>);
 Foo.props = ["foo"]; // 👈 You need to manually specify the props :(
 ```
 
@@ -28,7 +28,7 @@ interface Props {
   foo: string;
 }
 
-const Foo = defineComponent((props: Props) =>()=> <div>{props.foo}</div>);
+const Foo = defineComponent((props: Props) => () => <div>{props.foo}</div>);
 Object.defineProperty(Foo, "props", {
   value: ["foo"],
 }); // 👈 This plugin will do it for you!
