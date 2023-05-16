@@ -1,6 +1,6 @@
 {
   "name": "unplugin-vue-tsx-auto-props",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "packageManager": "pnpm@8.5.1",
   "author": "Ray <i@mk1.io> (@so1ve)",
   "description": "",
