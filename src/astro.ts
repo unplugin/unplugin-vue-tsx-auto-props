@@ -4,7 +4,7 @@ import unplugin from ".";
 
 export default function (options: Options) {
   return {
-    name: "unplugin-auto-import",
+    name: "unplugin-vue-tsx-auto-props",
     hooks: {
       "astro:config:setup": async (astro: any) => {
         astro.config.vite.plugins ||= [];
