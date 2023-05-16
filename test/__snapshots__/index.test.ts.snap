@@ -172,6 +172,39 @@ Object.defineProperty(Foo, \\"props\\", {
 }
 `;
 
+exports[`should > should transform named export 1`] = `
+{
+  "code": "
+import { defineComponent } from \\"vue\\";
+
+interface Props<T> {
+  a: number;
+  b: {
+    some: boolean
+  }
+}
+export const Foo = defineComponent(
+  <T>(props: Props<T>) => {
+    return () => <div>{props}</div>;
+  },
+);
+Object.defineProperty(Foo, \\"props\\", {
+  value: [\\"a\\",\\"b\\"],
+});
+",
+  "map": SourceMap {
+    "file": undefined,
+    "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;;GAAE;",
+    "names": [],
+    "sources": [
+      "",
+    ],
+    "sourcesContent": undefined,
+    "version": 3,
+  },
+}
+`;
+
 exports[`should > should transform setup option 1`] = `
 {
   "code": "

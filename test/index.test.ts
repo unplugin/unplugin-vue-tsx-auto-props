@@ -52,6 +52,25 @@ export default defineComponent(
     expect(transform(code)).toMatchSnapshot();
   });
 
+  it("should transform named export", () => {
+    const code = `
+import { defineComponent } from "vue";
+
+interface Props<T> {
+  a: number;
+  b: {
+    some: boolean
+  }
+}
+export const Foo = defineComponent(
+  <T>(props: Props<T>) => {
+    return () => <div>{props}</div>;
+  },
+);
+`;
+    expect(transform(code)).toMatchSnapshot();
+  });
+
   it("should not transform complex type", () => {
     const code = `
 import { defineComponent } from "vue";
