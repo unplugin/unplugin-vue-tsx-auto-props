@@ -29,25 +29,11 @@
       "require": "./dist/index.cjs",
       "import": "./dist/index.mjs"
     },
+    "./*": "./*",
     "./astro": {
       "types": "./dist/astro.d.ts",
       "require": "./dist/astro.cjs",
       "import": "./dist/astro.mjs"
-    },
-    "./vite": {
-      "types": "./dist/vite.d.ts",
-      "require": "./dist/vite.cjs",
-      "import": "./dist/vite.mjs"
-    },
-    "./webpack": {
-      "types": "./dist/webpack.d.ts",
-      "require": "./dist/webpack.cjs",
-      "import": "./dist/webpack.mjs"
-    },
-    "./rollup": {
-      "types": "./dist/rollup.d.ts",
-      "require": "./dist/rollup.cjs",
-      "import": "./dist/rollup.mjs"
     },
     "./esbuild": {
       "types": "./dist/esbuild.d.ts",
@@ -59,6 +45,11 @@
       "require": "./dist/nuxt.cjs",
       "import": "./dist/nuxt.mjs"
     },
+    "./rollup": {
+      "types": "./dist/rollup.d.ts",
+      "require": "./dist/rollup.cjs",
+      "import": "./dist/rollup.mjs"
+    },
     "./rspack": {
       "types": "./dist/rspack.d.ts",
       "require": "./dist/rspack.cjs",
@@ -69,7 +60,16 @@
       "require": "./dist/types.cjs",
       "import": "./dist/types.mjs"
     },
-    "./*": "./*"
+    "./vite": {
+      "types": "./dist/vite.d.ts",
+      "require": "./dist/vite.cjs",
+      "import": "./dist/vite.mjs"
+    },
+    "./webpack": {
+      "types": "./dist/webpack.d.ts",
+      "require": "./dist/webpack.cjs",
+      "import": "./dist/webpack.mjs"
+    }
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -112,7 +112,7 @@
   "devDependencies": {
     "@antfu/ni": "^0.21.3",
     "@nuxt/schema": "^3.4.3",
-    "@so1ve/eslint-config": "^0.85.0",
+    "@so1ve/eslint-config": "^0.86.0",
     "@types/babel__traverse": "^7.18.5",
     "@types/node": "^18.16.9",
     "bumpp": "^9.1.0",
