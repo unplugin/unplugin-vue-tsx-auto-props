@@ -30,6 +30,7 @@ const Bar = defineComponent(
   },
 );
 `;
+
     expect(transform(code)).toMatchSnapshot();
   });
 
@@ -49,6 +50,7 @@ export default defineComponent(
   },
 );
 `;
+
     expect(transform(code)).toMatchSnapshot();
   });
 
@@ -68,6 +70,7 @@ export const Foo = defineComponent(
   },
 );
 `;
+
     expect(transform(code)).toMatchSnapshot();
   });
 
@@ -81,6 +84,7 @@ type Props = 1 extends 1 ? {
 
 const Foo = defineComponent((props: Props) => () => <div>{props}></div>);
 `;
+
     expect(transform(code)).toMatchSnapshot();
   });
 
