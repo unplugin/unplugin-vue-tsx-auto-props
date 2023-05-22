@@ -177,8 +177,7 @@ export function findDefineComponentCall(
 ): FindDefineComponentCallReturn {
   const result: FindDefineComponentCallReturn = [];
   traverse(parsed, {
-    VariableDeclarator({node:{id,init,end}}) {
-      
+    VariableDeclarator({ node: { id, init, end } }) {
       if (
         t.isCallExpression(init) &&
         t.isIdentifier(init?.callee) &&
