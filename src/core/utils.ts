@@ -177,18 +177,17 @@ export function findDefineComponentCall(
 ): FindDefineComponentCallReturn {
   const result: FindDefineComponentCallReturn = [];
   traverse(parsed, {
-    VariableDeclarator(path) {
-      const { node } = path;
-      const { init } = node;
+    VariableDeclarator({node:{id,init,end}}) {
+      
       if (
         t.isCallExpression(init) &&
         t.isIdentifier(init?.callee) &&
-        t.isIdentifier(node.id) &&
+        t.isIdentifier(id) &&
         init.callee.name === "defineComponent"
       ) {
         const memberKeys = findPropTypeMemberKeys(parsed, init);
         if (memberKeys.length > 0) {
-          result.push([node.id.name, memberKeys, node.end!]);
+          result.push([id.name, memberKeys, end!]);
         }
       }
     },
