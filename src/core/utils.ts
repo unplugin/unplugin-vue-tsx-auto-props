@@ -156,7 +156,7 @@ function findPropTypeMemberKeys(parsed: Parsed, node: t.CallExpression) {
   if (t.isArrowFunctionExpression(arg) || t.isFunctionExpression(arg)) {
     const propsParam = arg.params[0];
     if (
-      propsParam.typeAnnotation &&
+      propsParam?.typeAnnotation &&
       "typeAnnotation" in propsParam.typeAnnotation &&
       isAllowedTypeAnnotation(propsParam.typeAnnotation.typeAnnotation)
     ) {
