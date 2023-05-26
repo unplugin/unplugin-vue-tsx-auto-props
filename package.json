@@ -112,7 +112,7 @@
   "devDependencies": {
     "@antfu/ni": "^0.21.3",
     "@nuxt/schema": "^3.5.1",
-    "@so1ve/eslint-config": "^0.93.3",
+    "@so1ve/eslint-config": "^0.93.4",
     "@types/babel__traverse": "^7.20.0",
     "@types/node": "^18.16.15",
     "bumpp": "^9.1.0",
