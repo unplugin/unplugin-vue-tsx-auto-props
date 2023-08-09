@@ -170,9 +170,10 @@ function findPropTypeMemberKeys(parsed: Parsed, node: t.CallExpression) {
   return [];
 }
 
+type FindDefineComponentCallReturn=[componentName: string, props: string[], end: number][]
 export function findDefineComponentCall(
   parsed: Parsed,
-): [componentName: string, props: string[], end: number][] {
+): FindDefineComponentCallReturn {
   const result: FindDefineComponentCallReturn = [];
   traverse(parsed, {
     VariableDeclarator({ node: { id, init, end } }) {
