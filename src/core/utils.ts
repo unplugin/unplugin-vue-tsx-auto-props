@@ -170,7 +170,11 @@ function findPropTypeMemberKeys(parsed: Parsed, node: t.CallExpression) {
   return [];
 }
 
-type FindDefineComponentCallReturn=[componentName: string, props: string[], end: number][]
+type FindDefineComponentCallReturn = [
+  componentName: string,
+  props: string[],
+  end: number,
+][];
 export function findDefineComponentCall(
   parsed: Parsed,
 ): FindDefineComponentCallReturn {
