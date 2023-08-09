@@ -1,7 +1,7 @@
 import type { ParseResult } from "@babel/parser";
 import { parse as babelParse } from "@babel/parser";
-import * as t from "@babel/types";
 import _traverse from "@babel/traverse";
+import * as t from "@babel/types";
 
 const traverse =
   typeof (_traverse as any).default === "undefined"

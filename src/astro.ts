@@ -1,5 +1,4 @@
 import type { Options } from "./types";
-
 import unplugin from ".";
 
 export default (options: Options) => ({
