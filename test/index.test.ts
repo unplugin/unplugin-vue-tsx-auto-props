@@ -3,8 +3,8 @@ import { describe, expect, it } from "vitest";
 import { transform } from "../src/core/transform";
 
 describe("should", () => {
-  it("transform", () => {
-    const code = `
+	it("transform", () => {
+		const code = `
 import { defineComponent } from "vue";
 
 interface Props<T> {
@@ -31,11 +31,11 @@ const Bar = defineComponent(
 );
 `;
 
-    expect(transform(code)).toMatchSnapshot();
-  });
+		expect(transform(code)).toMatchSnapshot();
+	});
 
-  it("should not transform default export", () => {
-    const code = `
+	it("should not transform default export", () => {
+		const code = `
 import { defineComponent } from "vue";
 
 interface Props<T> {
@@ -51,11 +51,11 @@ export default defineComponent(
 );
 `;
 
-    expect(transform(code)).toMatchSnapshot();
-  });
+		expect(transform(code)).toMatchSnapshot();
+	});
 
-  it("should transform named export", () => {
-    const code = `
+	it("should transform named export", () => {
+		const code = `
 import { defineComponent } from "vue";
 
 interface Props<T> {
@@ -71,11 +71,11 @@ export const Foo = defineComponent(
 );
 `;
 
-    expect(transform(code)).toMatchSnapshot();
-  });
+		expect(transform(code)).toMatchSnapshot();
+	});
 
-  it("should not transform complex type", () => {
-    const code = `
+	it("should not transform complex type", () => {
+		const code = `
 import { defineComponent } from "vue";
 
 type Props = 1 extends 1 ? {
@@ -85,21 +85,21 @@ type Props = 1 extends 1 ? {
 const Foo = defineComponent((props: Props) => () => <div>{props}></div>);
 `;
 
-    expect(transform(code)).toMatchSnapshot();
-  });
+		expect(transform(code)).toMatchSnapshot();
+	});
 
-  it("should not transform without type annotation", () => {
-    const code = `
+	it("should not transform without type annotation", () => {
+		const code = `
 import { defineComponent } from "vue";
 
 const Foo = defineComponent((props) => () => <div>{props}></div>);
 `;
 
-    expect(transform(code)).toMatchSnapshot();
-  });
+		expect(transform(code)).toMatchSnapshot();
+	});
 
-  it("should transform function declaration", () => {
-    const code = `
+	it("should transform function declaration", () => {
+		const code = `
 import { defineComponent } from "vue";
 
 type Props = {
@@ -109,11 +109,11 @@ type Props = {
 const Foo = defineComponent(function (props: Props) { return () => <div>{props}></div> });
 `;
 
-    expect(transform(code)).toMatchSnapshot();
-  });
+		expect(transform(code)).toMatchSnapshot();
+	});
 
-  it("should transform type argument", () => {
-    const code = `
+	it("should transform type argument", () => {
+		const code = `
 import { defineComponent } from "vue";
 
 type Props = {
@@ -123,31 +123,31 @@ type Props = {
 const Foo = defineComponent<Props>((props) => () => <div>{props}></div>);
 `;
 
-    expect(transform(code)).toMatchSnapshot();
-  });
+		expect(transform(code)).toMatchSnapshot();
+	});
 
-  it("should transform inline type", () => {
-    const code = `
+	it("should transform inline type", () => {
+		const code = `
 import { defineComponent } from "vue";
 
 const Foo = defineComponent<{ foo: number }>((props) => () => <div>{props}></div>);
 `;
 
-    expect(transform(code)).toMatchSnapshot();
-  });
+		expect(transform(code)).toMatchSnapshot();
+	});
 
-  it("should transform inline argument type", () => {
-    const code = `
+	it("should transform inline argument type", () => {
+		const code = `
 import { defineComponent } from "vue";
 
 const Foo = defineComponent((props: { foo: number }) => () => <div>{props}></div>);
 `;
 
-    expect(transform(code)).toMatchSnapshot();
-  });
+		expect(transform(code)).toMatchSnapshot();
+	});
 
-  it("should transform setup option", () => {
-    const code = `
+	it("should transform setup option", () => {
+		const code = `
 import { defineComponent } from "vue";
 
 const Foo = defineComponent({
@@ -155,11 +155,11 @@ const Foo = defineComponent({
 });
 `;
 
-    expect(transform(code)).toMatchSnapshot();
-  });
+		expect(transform(code)).toMatchSnapshot();
+	});
 
-  it("should not transform setup option when props is set", () => {
-    const code = `
+	it("should not transform setup option when props is set", () => {
+		const code = `
 import { defineComponent } from "vue";
 
 const Foo = defineComponent({
@@ -170,6 +170,6 @@ const Foo = defineComponent({
 });
 `;
 
-    expect(transform(code)).toMatchSnapshot();
-  });
+		expect(transform(code)).toMatchSnapshot();
+	});
 });
