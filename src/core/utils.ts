@@ -60,7 +60,7 @@ function findTypeDefinitionMembersByName(
 			if (node.id.name === name) {
 				if (!("members" in node.typeAnnotation)) {
 					throw new Error(
-						`Cannot resolve type alias: ${name}because it's right operand is not anobjec literal.`,
+						`Cannot resolve type alias: ${name} because it's right operand is not an object literal.`,
 					);
 				}
 				result = node.typeAnnotation.members as any;
