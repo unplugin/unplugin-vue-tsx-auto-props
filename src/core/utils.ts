@@ -59,9 +59,11 @@ function findTypeDefinitionMembersByName(
 		TSTypeAliasDeclaration({ node }) {
 			if (node.id.name === name) {
 				if (!("members" in node.typeAnnotation)) {
-					throw new Error("Cannot resolve type alias: " + name + "because it's right operand is not anobjec literal.");
+					throw new Error(
+						`Cannot resolve type alias: ${name}because it's right operand is not anobjec literal.`,
+					);
 				}
-				result = node.typeAnnotation .members as any;
+				result = node.typeAnnotation.members as any;
 			}
 		},
 	});
