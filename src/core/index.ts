@@ -1,4 +1,3 @@
-// TODO: Support `setup` option
 import { createUnplugin } from "unplugin";
 
 import { transform } from "./transform";
