@@ -62,6 +62,7 @@ function findTypeDefinitionMembersByName(
 					console.warn(
 						`Cannot resolve type alias "${name}" because it's right operand is not an object literal.`,
 					);
+
 					return;
 				}
 				result = node.typeAnnotation.members as any;
