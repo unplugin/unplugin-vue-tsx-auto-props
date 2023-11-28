@@ -1,3 +1,7 @@
+# ⚠⚠⚠ DEPRECATED: Moved to https://github.com/so1ve/vue.ts/tree/main/packages/tsx-auto-props!
+
+---
+
 # unplugin-vue-tsx-auto-props
 
 [![NPM version](https://img.shields.io/npm/v/unplugin-vue-tsx-auto-props?color=a1b858&label=)](https://www.npmjs.com/package/unplugin-vue-tsx-auto-props)
