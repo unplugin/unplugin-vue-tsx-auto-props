@@ -35,8 +35,8 @@ devDependencies:
     specifier: ^0.120.2
     version: 0.120.2(eslint@8.48.0)(prettier@3.0.2)(typescript@5.2.2)(vite@4.4.9)(vitest@0.34.3)
   '@so1ve/prettier-config':
-    specifier: ^0.120.2
-    version: 0.120.2(prettier@3.0.2)
+    specifier: ^0.123.0
+    version: 0.123.0(prettier@3.0.2)
   '@types/babel__traverse':
     specifier: ^7.20.0
     version: 7.20.1
@@ -1227,8 +1227,28 @@ packages:
       prettier-plugin-pkgsort: 0.2.1(prettier@3.0.2)
     dev: true
 
+  /@so1ve/prettier-config@0.123.0(prettier@3.0.2):
+    resolution: {integrity: sha512-DHKLbt2QC04t0aOHduWVsnTnq86wjHVrGkNTR5zKopieITdFHeEYLYcbAx2gJL0SrWu/sOqgxlLb/PQ9ropSPQ==}
+    peerDependencies:
+      prettier: ^3.0.0
+    dependencies:
+      '@so1ve/prettier-plugin-toml': 0.123.0(prettier@3.0.2)
+      prettier: 3.0.2
+      prettier-plugin-astro: 0.12.0
+      prettier-plugin-curly-and-jsdoc: 0.123.0(prettier@3.0.2)
+      prettier-plugin-pkgsort: 0.2.1(prettier@3.0.2)
+    dev: true
+
   /@so1ve/prettier-plugin-toml@0.120.2(prettier@3.0.2):
     resolution: {integrity: sha512-NOYEAQRGoH7IKhTxY4bbIyQAeHZ4IcMpuuyIjjlP9Q70t3EgskuYB6ygmzobtTidb/2SC0GhHKRc5W30UFZATg==}
+    peerDependencies:
+      prettier: ^3.0.0
+    dependencies:
+      prettier: 3.0.2
+    dev: true
+
+  /@so1ve/prettier-plugin-toml@0.123.0(prettier@3.0.2):
+    resolution: {integrity: sha512-NuyaMFA68SiZYAog6/CQ0QpczBRS+kJyURkzv5Gs8kBaIJEGx0YyfBFlzCdFeA5wa4xsHbmT1oCjdLZ+LVjGgw==}
     peerDependencies:
       prettier: ^3.0.0
     dependencies:
@@ -5207,6 +5227,14 @@ packages:
 
   /prettier-plugin-curly-and-jsdoc@0.120.2(prettier@3.0.2):
     resolution: {integrity: sha512-elf3k79zG2T2Ogfa1v7gIIG7L0/LZRed6ixUFgW49hxehHKVW+yt1Uka47lhU5haBmaufQicqkcS61VIhKJXhw==}
+    peerDependencies:
+      prettier: ^3.0.0
+    dependencies:
+      prettier: 3.0.2
+    dev: true
+
+  /prettier-plugin-curly-and-jsdoc@0.123.0(prettier@3.0.2):
+    resolution: {integrity: sha512-tLsm49FDRb3bAqFpPJJ8gX1rAVVHjwDrbzKPSrCk+uI7rPn9FJ/VAAb9exv4jOYSSoNLgH86LxRIRKh8P+QjiA==}
     peerDependencies:
       prettier: ^3.0.0
     dependencies:
